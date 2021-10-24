@@ -20,7 +20,7 @@ public class Fperdiak {
     private String rpdiakdescr;
 
 //    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name=, referencedColumnName = "rpdiak_code")
+//    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code")
 //    private List<Fdiakopes> fdiakopes;
 
     public Fperdiak() {

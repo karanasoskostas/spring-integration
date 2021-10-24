@@ -26,7 +26,20 @@ public class Fdiakopes {
     @Column(name = "rdiak_eidos")
     private Long diakeidos;
 
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code")
+//    private Fperdiak fperdiak;
 
+    @Transient
+    private String test;
+
+    public String getTest() {
+        return "123";
+    }
+
+    public void setTest(String test) {
+        this.test = "test";
+    }
 
     public Long getId() {
         return id;
