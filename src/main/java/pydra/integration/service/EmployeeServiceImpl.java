@@ -1,9 +1,14 @@
 package pydra.integration.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pydra.integration.model.Employee;
 import pydra.integration.repository.EmployeeRepository;
+import pydra.integration.repository.PageSorting.EmployeePSRepository;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository eRepository;
+
+    @Autowired
+    private EmployeePSRepository epsRepository;
 
     @Override
     public List<Employee> getEmployees(){
@@ -52,7 +60,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> getEmployeesLikeNameIgnoreCase(String name) {
-        return eRepository.findByNameContainingIgnoreCase(name);
+        Sort sort = Sort.by(Sort.Direction.ASC,"name");
+        return eRepository.findByNameContainingIgnoreCase(name, sort);
     }
 
     @Override
@@ -65,5 +74,27 @@ public class EmployeeServiceImpl implements EmployeeService {
         return eRepository.findByNameAndLocation(name, location);
     }
 
+    // paging and sorting
+    @Override
+    public List<Employee> getpsEmployees(int pagenumber, int pagesize) {
+        Pageable pages = PageRequest.of(pagenumber, pagesize, Sort.by("name").descending().and(Sort.by("id").ascending()));
+        return epsRepository.findAll(pages).getContent();
+    }
+
+    @Override
+    public List<Employee> getpsEmployeesSorted() {
+        Sort sort = Sort.by(Sort.Direction.DESC,"name");
+        return epsRepository.findAll(sort);
+        // ή return eRepository.findAll(sort);
+    }
+
+    @Override
+    public Integer deleteByEmployeeId(Long id) {
+        return eRepository.deleteByEmployeeId(id);
+    }
+
 
 }
+
+
+

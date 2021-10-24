@@ -1,5 +1,6 @@
 package pydra.integration.service;
 
+import org.springframework.data.domain.Sort;
 import pydra.integration.model.Employee;
 import java.util.List;
 
@@ -23,6 +24,13 @@ public interface EmployeeService {
     List<Employee> getEmployeeNameBetween(String fromname, String toname);
 
     List<Employee> getEmployeeByNameAndLocation(String name, String location);
+
+
+    List<Employee> getpsEmployees(int pagenumber, int pagesize);
+
+    List<Employee> getpsEmployeesSorted();
+
+    Integer deleteByEmployeeId(Long id);
 
 
 }

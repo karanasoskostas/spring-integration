@@ -46,6 +46,7 @@ public class EmployeeController {
         return new ResponseEntity<List<Employee>>(eService.getEmployees() , HttpStatus.OK);
     }
 
+
     @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getSingleEmployee(@PathVariable("id") Long id){
         return new ResponseEntity<>(eService.getSingleEmployee(id), HttpStatus.OK);
@@ -70,6 +71,11 @@ public class EmployeeController {
 //                eService.deleteEmployee(id);
     }
 
+    @DeleteMapping("/employees/deletebyid")
+    public ResponseEntity<Integer> deleteEmployeeById(@RequestParam("id") Long id){
+        return new ResponseEntity<Integer>(eService.deleteByEmployeeId(id), HttpStatus.OK);
+    }
+
     @GetMapping("/employees/findbyname/{name}")
     public ResponseEntity<List<Employee>> getEmployeeByName(@PathVariable("name") String name){
         return new ResponseEntity<List<Employee>>(eService.getEmployeesByName(name), HttpStatus.OK);
@@ -89,6 +95,23 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> getEmployeeByNameAndLocation(@RequestParam("name") String name, @RequestParam("location") String location){
         return new ResponseEntity<List<Employee>>(eService.getEmployeeByNameAndLocation(name, location), HttpStatus.OK);
     }
+
+    // ---------------------------------------------------------------------------------------------------------------
+    //  PAGING GET ALL
+    @GetMapping("/employees/paging")
+    public ResponseEntity<List<Employee>> getpsEmployees(@RequestParam int pagenumber, @RequestParam int pagesize) {
+        return new ResponseEntity<List<Employee>>(eService.getpsEmployees(pagenumber,pagesize), HttpStatus.OK);
+    }
+    // ---------------------------------------------------------------------------------------------------------------
+    //  SORTING ALL
+    @GetMapping("/employees/sorted")
+    public ResponseEntity<List<Employee>> getEmployeesSorted() {
+        return new ResponseEntity<List<Employee>>(eService.getpsEmployeesSorted(), HttpStatus.OK);
+    }
+    // ---------------------------------------------------------------------------------------------------------------
+
+
+
 
 }
 
