@@ -1,5 +1,7 @@
 package pydra.integration.Fdiakopes;
 
+import pydra.integration.Fperdiak.Fperdiak;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,11 +24,12 @@ public class Fdiakopes {
     @Column(name = "diakopes_status")
     private Long status;
 
-    @Column(name = "rdiak_eidos")
+    @Column(name = "rdiak_eidos", updatable = false, insertable = false)
     private Long diakeidos;
 
-//    @ManyToOne
-//    private Fperdiak fperdiak;
+    @ManyToOne
+    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code")
+    private Fperdiak fperdiak;
 ////    @Transient
 //    private String fperdiakdescr;
 
@@ -72,8 +75,13 @@ public class Fdiakopes {
         this.diakeidos = diakeidos;
     }
 
+    public Fperdiak getFperdiak() {
+        return fperdiak;
+    }
 
-
+    public void setFperdiak(Fperdiak fperdiak) {
+        this.fperdiak = fperdiak;
+    }
 
     @Override
     public String toString() {

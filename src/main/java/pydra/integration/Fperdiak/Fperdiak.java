@@ -1,6 +1,7 @@
 package pydra.integration.Fperdiak;
 
 import org.hibernate.annotations.Cascade;
+import pydra.integration.Fdiakopes.Fdiakopes;
 
 import javax.persistence.*;
 
@@ -22,9 +23,9 @@ public class Fperdiak {
     @Column(name="rpdiak_descr")
     private String rpdiakdescr;
 
-//    @OneToMany
-//    @JoinColumn(name="rpdiak_code", referencedColumnName = "rdiakeidos")
-//    private List<Fperdiak> fperdiak;
+    @OneToMany
+    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code")
+    private List<Fdiakopes> fdiakopes;
 
     public Fperdiak() {
     }

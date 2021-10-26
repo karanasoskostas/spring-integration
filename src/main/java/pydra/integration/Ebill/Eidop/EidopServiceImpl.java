@@ -11,8 +11,8 @@ public class EidopServiceImpl implements EidopService{
     @Autowired
     private EidopRepository eRepository;
 
-    public List<Eidop> getEidop() {
-        return eRepository.getEidopModel();
+    public List<Eidop> getEidop(String fromdate, String todate) {
+        return eRepository.getEidopModel(fromdate,todate);
     }
 
 }

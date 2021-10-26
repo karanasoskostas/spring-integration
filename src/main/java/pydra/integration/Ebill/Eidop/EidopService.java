@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EidopService {
 
-    List<Eidop> getEidop();
+    List<Eidop> getEidop(String fromdate, String todate);
 
 
 
