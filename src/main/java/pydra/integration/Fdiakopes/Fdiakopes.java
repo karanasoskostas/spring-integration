@@ -24,14 +24,13 @@ public class Fdiakopes {
     @Column(name = "diakopes_status")
     private Long status;
 
-    @Column(name = "rdiak_eidos", updatable = false, insertable = false)
+    @Column(name = "rdiak_eidos")
     private Long diakeidos;
 
     @ManyToOne
-    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code")
+    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code", updatable = false, insertable = false)
     private Fperdiak fperdiak;
-////    @Transient
-//    private String fperdiakdescr;
+
 
     public Fdiakopes(){}
 
