@@ -9,4 +9,6 @@ public interface FdiakopesService {
     List<Fdiakopes> getFdiakopes();
 
     List<Fdiakopes> getFdiakopesOpen();
+
+    Fdiakopes saveFdiakopes(Fdiakopes fdiakopes);
 }

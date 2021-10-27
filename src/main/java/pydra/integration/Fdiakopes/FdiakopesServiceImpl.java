@@ -23,4 +23,9 @@ public class FdiakopesServiceImpl implements FdiakopesService {
     public List<Fdiakopes> getFdiakopesOpen() {
         return eRepository.getFdiakopesOpen();
     }
+
+    @Override
+    public Fdiakopes saveFdiakopes(Fdiakopes fdiakopes) {
+        return eRepository.save(fdiakopes);
+    }
 }
