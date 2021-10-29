@@ -25,6 +25,8 @@ public interface Eidop {
 
     Long getxrekyb();
 
+    BigDecimal getposotrexoysasperiodoy();
+
     BigDecimal getypoloipo();
 
     Long getrmatimolog();
@@ -34,10 +36,6 @@ public interface Eidop {
     Long getpreviousperiods();
 
     String getstatus();
-
-    String getperiodfrom();
-
-    String getperiodto();
 
     Long getmaa();
 
@@ -56,8 +54,6 @@ public interface Eidop {
     Long getnea();
 
     Long getprohg();
-
-    Date getdateorist();
 
     Date getdatelhxh();
 
@@ -83,8 +79,9 @@ public interface Eidop {
 
     Date geteidopcreatedate();
 
+    String getliablename();
 
-
+    String getliableafm();
 
 
 }
