@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pydra.integration.exception.GeneralException;
 
 
 import java.util.List;
@@ -26,7 +27,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee saveEmployee(Employee employee) {
-        return eRepository.save(employee);
+        String empname;
+
+            empname = employee.getName();
+//            System.out.println(employee.getName());
+            if (employee.getName() == null){
+                empname = "";
+            }
+            if (empname.isEmpty() || empname.length() == 0 ){
+                throw new GeneralException("Name can't be Empty");
+            }
+        try {
+            return eRepository.save(employee);
+
+        } catch (IllegalArgumentException e) {
+            throw new GeneralException("Empty Employee" + e.getMessage());
+        }
+        catch (Exception e){
+            throw new GeneralException("General Exception" + e.getMessage());
+        }
     }
 
     @Override
@@ -35,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employee.isPresent()){
             return employee.get();
         }
-        throw new RuntimeException("Not Found Employee with id "+id);
+        throw new GeneralException("Not Found Employee with id " + id);
     }
 
     @Override

@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pydra.integration.Employee.Employee;
-import pydra.integration.Employee.EmployeeService;
+import pydra.integration.exception.GeneralException;
+import pydra.integration.exception.ErrorObject;
 
-import javax.validation.Valid;
 import java.util.List;
 
 
@@ -51,7 +50,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee ){
+    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee ){
+        System.out.println("@PostMapping");
         return new ResponseEntity<>(eService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
@@ -107,6 +107,14 @@ public class EmployeeController {
         return new ResponseEntity<List<Employee>>(eService.getpsEmployeesSorted(), HttpStatus.OK);
     }
     // ---------------------------------------------------------------------------------------------------------------
+
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorObject> handleException(GeneralException ex){
+        ErrorObject eobject = new ErrorObject(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis());
+        return new ResponseEntity<ErrorObject>(eobject,HttpStatus.NOT_FOUND);
+    }
+
 
 
 
