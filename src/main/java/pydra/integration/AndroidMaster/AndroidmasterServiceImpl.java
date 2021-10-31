@@ -2,6 +2,7 @@ package pydra.integration.AndroidMaster;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pydra.integration.exception.GeneralException;
 
 import java.util.List;
 
@@ -13,6 +14,16 @@ public class AndroidmasterServiceImpl implements AndroidmasterService {
 
     @Override
     public List<Androidmaster> getAndroidmaster() {
-        return eRepository.findAll();
+        List<Androidmaster> aMaster = null;
+        try {
+            aMaster = eRepository.findAll();
+        } catch (Exception ex){
+            throw new GeneralException("AndroidMaster Exception :"+ex.getMessage());
+        }
+        if (aMaster.isEmpty()){
+            throw new GeneralException("Ο πίνακας AndroidMaster δεν έχει εγγραφές !");
+        }
+
+        return aMaster;
     }
 }
