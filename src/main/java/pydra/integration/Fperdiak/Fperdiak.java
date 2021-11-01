@@ -23,9 +23,6 @@ public class Fperdiak {
     @Column(name="rpdiak_descr")
     private String rpdiakdescr;
 
-    @OneToMany
-    @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code")
-    private List<Fdiakopes> fdiakopes;
 
     public Fperdiak() {
     }

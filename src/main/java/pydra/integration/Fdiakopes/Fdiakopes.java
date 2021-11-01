@@ -3,6 +3,7 @@ package pydra.integration.Fdiakopes;
 import pydra.integration.Fperdiak.Fperdiak;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="Ydr_Fdiakopes")
@@ -30,6 +31,9 @@ public class Fdiakopes {
     @ManyToOne
     @JoinColumn(name="rdiak_eidos", referencedColumnName = "rpdiak_code", updatable = false, insertable = false)
     private Fperdiak fperdiak;
+
+    @Column(name="RDIAK_DATE_DIAK")
+    private Date datediak;
 
 
     public Fdiakopes(){}
@@ -80,6 +84,14 @@ public class Fdiakopes {
 
     public void setFperdiak(Fperdiak fperdiak) {
         this.fperdiak = fperdiak;
+    }
+
+    public Date getDatediak() {
+        return datediak;
+    }
+
+    public void setDatediak(Date datediak) {
+        this.datediak = datediak;
     }
 
     @Override

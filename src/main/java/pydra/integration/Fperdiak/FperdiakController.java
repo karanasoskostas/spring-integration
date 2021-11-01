@@ -20,10 +20,5 @@ public class FperdiakController {
         return new ResponseEntity<List<Fperdiak>>(eService.getFperdiak(),HttpStatus.OK);
     }
 
-//    @GetMapping("/eidop")
-//    public ResponseEntity<List<EidopModel>> geteidopmodel(){
-//        return new ResponseEntity<List<EidopModel>>(eService.getEidopModel(),HttpStatus.OK);
-//    }
-
 
 }

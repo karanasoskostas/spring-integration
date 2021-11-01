@@ -73,8 +73,8 @@ public interface EidopRepository extends JpaRepository<Dual, Long> {
                        "                                           ydr_fapodeix.rap_etos = ydr_fapodeix_d.rapd_etos and                                                  \n" +
                        "                                           ydr_fapodeix.rap_trim = ydr_fapodeix_d.rapd_trim )                                                    \n" +
                 "                    inner join ydr_rel_id on (ydr_fapodeix.id = ydr_rel_id.logar_id)                                                                    \n" +
-               "                     left outer join ydr_fpersons l ON (ydr_fconsumers.rma_liable_id = l.id  )                                                    \n" +
-               "                     left outer join ydr_fpersons o ON (ydr_fconsumers.rma_owner_id = o.id  )                                                     \n" +
+               "                     left outer join ydr_fpersons l ON (ydr_fapodeix.rap_liable_id = l.id  )                                                    \n" +
+               "                     left outer join ydr_fpersons o ON (decode(ydr_fapodeix.rap_owner_id,null,ydr_fconsumers.rma_owner_id,ydr_fapodeix.rap_owner_id) = o.id  )    \n" +
                "                     left outer join ydr_ftameio_h  ON (ydr_fapodeix.rap_tam_id = ydr_ftameio_h.id )                                              \n" +
                "                     inner join snd_genpar on (1=1)                                                                                               \n" +
                        "where (to_char( decode(ydr_fapodeix.rap_create_date,null,ydr_fapodeix.rap_date_ekd ,ydr_fapodeix.rap_create_date), 'yyyymmdd') between :fromdate and :todate) \n" +

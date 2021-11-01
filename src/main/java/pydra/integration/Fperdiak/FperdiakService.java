@@ -7,10 +7,9 @@ import pydra.integration.test.EidopModel;
 import java.util.List;
 
 public interface FperdiakService {
+
     List<Fperdiak> getFperdiak();
 
 
-    String getFperdiakdesc(Long code);
 
-    List<EidopModel> getEidopModel();
 }

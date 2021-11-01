@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface FdiakopesRepository extends JpaRepository<Fdiakopes, Long> {
 
-    @Query(value = "Select * from ydr_fdiakopes d where d.diakopes_status = 0 ",
+    @Query(value = "Select * from ydr_fdiakopes d where d.diakopes_status = 0 and RDIAK_DATE_EPAN is null ",
            nativeQuery = true)
     List<Fdiakopes> getFdiakopesOpen();
 }
