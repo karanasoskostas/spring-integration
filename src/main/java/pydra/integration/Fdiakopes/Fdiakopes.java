@@ -36,6 +36,7 @@ public class Fdiakopes {
     private Date datediak;
 
 
+
     public Fdiakopes(){}
 
     public Long getId() {

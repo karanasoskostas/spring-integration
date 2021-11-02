@@ -1,6 +1,6 @@
 package pydra.integration.Fdiakopes;
 
-import pydra.integration.Fdiakopes.Fdiakopes;
+
 
 import java.util.List;
 
@@ -10,5 +10,9 @@ public interface FdiakopesService {
 
     List<Fdiakopes> getFdiakopesOpen();
 
+    List<FdiakopesDTO> getFdiakopesDTOOpen();
+
     Fdiakopes saveFdiakopes(Fdiakopes fdiakopes);
+
+
 }

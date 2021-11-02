@@ -30,6 +30,10 @@ public class FdiakopesController {
         return new ResponseEntity<>(eService.saveFdiakopes(fdiakopes), HttpStatus.OK);
     }
 
+    @GetMapping("/fdiakopesdto")
+    public ResponseEntity<List<FdiakopesDTO>> getFdiakopesDTO(){
+        return new ResponseEntity<List<FdiakopesDTO>>(eService.getFdiakopesDTOOpen(), HttpStatus.OK);
+    }
 
 
 }
