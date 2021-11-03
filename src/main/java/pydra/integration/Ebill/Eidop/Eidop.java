@@ -9,17 +9,15 @@ public interface Eidop {
 
     String getRmacode();
 
-    String getRmaydrom();
+    String getydrom();
 
     String getAddressakin();
 
-    String getrpeafm();
-
     String getperiod();
 
-    Date getrtrdateapo();
+    String getdateapo();
 
-    Date getrtrdateews();
+    String getdateews();
 
     Long getkatkyb();
 
@@ -32,10 +30,6 @@ public interface Eidop {
     Long getrmatimolog();
 
     Long getplhthosanexof();
-
-    Long getpreviousperiods();
-
-    String getstatus();
 
     Long getmaa();
 
@@ -55,13 +49,15 @@ public interface Eidop {
 
     Long getprohg();
 
-    Date getdatelhxh();
-
-    BigDecimal getsynxre();
+    String getdatelhxh();
 
     String getemail();
 
     String getmobtel();
+
+    String getliablename();
+
+    String getliableafm();
 
     String getownername();
 
@@ -71,17 +67,14 @@ public interface Eidop {
 
     String getlongitude();
 
-    Date geteidopdateekd();
+    String geteidopdateekd();
 
     String getbarcode();
 
-    Date geteidopdateplhr();
+    String geteidopdateplhr();
 
-    Date geteidopcreatedate();
+    String geteidopcreatedate();
 
-    String getliablename();
-
-    String getliableafm();
 
 
 }

@@ -1,6 +1,10 @@
 package pydra.integration.Fconsumers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import pydra.integration.Fperdiak.Fperdiak;
 import pydra.integration.Fpersons.Fpersons;
 
@@ -8,6 +12,8 @@ import javax.persistence.*;
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 
+@Getter
+@Setter
 @Entity
 @Table(name="ydr_fconsumers")
 public class Fconsumers {
@@ -17,6 +23,7 @@ public class Fconsumers {
 //    @SequenceGenerator(sequenceName = "SEQ_YDR_GENERAL", allocationSize = 1, name = "SEQ_YDR_GENERAL")
     @Column(name = "id")
     private Long id;
+
 
     @Column(name = "rma_code")
     private String code;
@@ -32,6 +39,14 @@ public class Fconsumers {
     @Column(name = "rma_liable_id")
     private Long liable_id;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="rma_owner_id", referencedColumnName = "id", updatable = false, insertable = false)
+    private Fpersons owner;
+
+    @Column(name = "rma_owner_id")
+    private Long owner_id;
+
 
     @Transient
     private String liablename;
@@ -41,6 +56,14 @@ public class Fconsumers {
 
     @Transient
     private String liableadt;
+
+    public Fpersons getLiable() {
+        return liable;
+    }
+
+    public Fpersons getOwner() {
+        return liable;
+    }
 
 
     public String getLiablename() {
@@ -55,29 +78,6 @@ public class Fconsumers {
         return getLiable().getAdt();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getYdrometro() {
-        return ydrometro;
-    }
-
-    public void setYdrometro(String ydrometro) {
-        this.ydrometro = ydrometro;
-    }
-
-    public Fpersons getLiable() {
-        return liable;
-    }
-
-    public void setLiable(Fpersons liable) {
-        this.liable = liable;
-    }
 
     public String getCode() throws ParseException {
         MaskFormatter formatter = new MaskFormatter("AAAAA-AAAA");
@@ -86,22 +86,5 @@ public class Fconsumers {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
 
-    public Long getLiable_id() {
-        return liable_id;
-    }
-
-    public void setLiable_id(Long liable_id) {
-        this.liable_id = liable_id;
-    }
-
-    public void setLiablename(String liablename) {
-        this.liablename = liablename;
-    }
-
-    public Fconsumers() {
-    }
 }
