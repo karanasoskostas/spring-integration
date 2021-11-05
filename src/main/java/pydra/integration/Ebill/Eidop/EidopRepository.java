@@ -52,7 +52,8 @@ public interface EidopRepository extends JpaRepository<Dual, Long> {
                         "         to_char(rap_date_ekd,'yyyy-mm-dd')                                      as eidopdateekd,                                                \n" +
                         "         ydr_rel_id.id                                                           as barcode ,                                                    \n" +
                         "         to_char(ydr_ftameio_h.rtamh_date_plhr,'yyyy-mm-dd')                     as eidopdateplhr  ,                                             \n" +
-                        "         to_char(ydr_fapodeix.rap_create_date,'yyyy-mm-dd')                       as eidopcreatedate                                              \n" +
+                        "         to_char(ydr_fapodeix.rap_create_date,'yyyy-mm-dd')                       as eidopcreatedate ,                                             \n" +
+                        "         ydr_fapodeix.rap_tot_poso                                               as eidopposo                                                    \n" +
                         "from ydr_fconsumers inner join ydr_faddress on (rma_addr_odos_akin = ydr_faddress.id)                                                                   \n" +
                         "                     inner join ydr_fapodeix on (ydr_fapodeix.rap_rma_id=ydr_fconsumers.id )                                                             \n" +
                         "                     inner join ydr_fapodeix_d on (ydr_fapodeix.id=ydr_fapodeix_d.RAPD_ID_H  and                                                         \n" +

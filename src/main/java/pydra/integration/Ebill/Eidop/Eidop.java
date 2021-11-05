@@ -1,7 +1,7 @@
 package pydra.integration.Ebill.Eidop;
 
 import java.math.BigDecimal;
-import java.util.Date;
+
 
 public interface Eidop {
 
@@ -75,6 +75,7 @@ public interface Eidop {
 
     String geteidopcreatedate();
 
+    BigDecimal geteidopposo();
 
 
 }

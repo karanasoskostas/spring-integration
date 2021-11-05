@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import pydra.integration.Fperdiak.Fperdiak;
 import pydra.integration.Fpersons.Fpersons;
+import pydra.integration.Snd_genpar.Sndgenpar;
 
 import javax.persistence.*;
 import javax.swing.text.MaskFormatter;
@@ -31,6 +33,10 @@ public class Fconsumers {
     @Column(name = "rma_ydrom")
     private String ydrometro;
 
+    @Column(name = "emr")
+    private Integer emr;
+
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name="rma_liable_id", referencedColumnName = "id", updatable = false, insertable = false)
@@ -47,7 +53,6 @@ public class Fconsumers {
     @Column(name = "rma_owner_id")
     private Long owner_id;
 
-
     @Transient
     private String liablename;
 
@@ -56,6 +61,14 @@ public class Fconsumers {
 
     @Transient
     private String liableadt;
+
+
+    @Transient
+    private String diadromhformat;
+
+    public void setDiadromhformat(String diadromhformat) {
+        this.diadromhformat = diadromhformat;
+    }
 
     public Fpersons getLiable() {
         return liable;
@@ -80,11 +93,13 @@ public class Fconsumers {
 
 
     public String getCode() throws ParseException {
-        MaskFormatter formatter = new MaskFormatter("AAAAA-AAAA");
+        MaskFormatter formatter = new MaskFormatter(this.diadromhformat);
         formatter.setValueContainsLiteralCharacters(false);
         code = formatter.valueToString(code);
         return code;
     }
 
+    public Fconsumers() {
+    }
 
 }
