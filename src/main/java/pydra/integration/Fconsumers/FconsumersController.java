@@ -30,8 +30,8 @@ public class FconsumersController {
         return new ResponseEntity<Fconsumers>(consumer, HttpStatus.OK);
     }
 
-    @GetMapping("/ballonread/ydrometra")
-    public ResponseEntity<List<FconsumersOnceDTO>> getDconsumersOnceDTO(){
-        return new ResponseEntity<List<FconsumersOnceDTO>>(eService.getFconsumersOnceDTO(), HttpStatus.OK);
-    }
+//    @GetMapping("/ballonread/ydrometra")
+//    public ResponseEntity<List<FconsumersOnceDTO>> getDconsumersOnceDTO(){
+//        return new ResponseEntity<List<FconsumersOnceDTO>>(eService.getFconsumersOnceDTO(), HttpStatus.OK);
+//    }
 }

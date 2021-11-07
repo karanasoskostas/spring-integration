@@ -1,6 +1,6 @@
-package pydra.integration.BalloonRead.ydrometra.YdrometraOnce;
+package pydra.integration.BalloonRead.ydrometra.YdrometraDates;
 
-public interface YdrometraOnce {
+public interface YdrometraDates {
     String getcode();
     String getserial_number();
     String gettype();

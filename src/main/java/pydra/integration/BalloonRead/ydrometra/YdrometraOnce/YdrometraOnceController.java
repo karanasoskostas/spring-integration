@@ -15,7 +15,7 @@ public class YdrometraOnceController {
     @Autowired
     private YdrometraOnceService eService;
 
-    @GetMapping("/balloonread/ydr")
+    @GetMapping("/balloonread/ydrometraonce")
     public ResponseEntity<List<YdrometraOnce>>  getAllOnce(){
         return new ResponseEntity<List<YdrometraOnce>>(eService.getAllOnce(), HttpStatus.OK);
     }
