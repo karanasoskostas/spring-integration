@@ -33,7 +33,7 @@ public class FconsumersServiceImpl implements FconsumersService{
     public List<FconsumersOnceDTO> getFconsumersOnceDTO(){
         List<FconsumersOnceDTO> dtos = null;
         try {
-            dtos = eRepository.findAll()
+            dtos = eRepository.findById(100L)
                     .stream()
                     .map(this::converttoDTO)
                     .collect(Collectors.toList());

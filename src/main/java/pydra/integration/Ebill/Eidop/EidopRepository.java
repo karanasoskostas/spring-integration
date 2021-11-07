@@ -14,7 +14,7 @@ import java.util.List;
 public interface EidopRepository extends JpaRepository<Dual, Long> {
 
         public static final String eidopsql =
-                "SELECT   ydr_fapodeix.id                                                        as id,                                                                  \n" +
+                        "SELECT   ydr_fapodeix.id                                                        as id,                                                                  \n" +
                         "         FN_FORMAT_DIADROMI(rma_code, snd_genpar.DIADROMH_FORMAT)               as rmacode,                                                     \n" +
                         "         ydr_fconsumers.rma_ydrom                                               as ydrom,                                                       \n" +
                         "         rad_address||' '||rma_addr_no1_akin                                    as addressakin,                                                 \n" +
