@@ -7,4 +7,7 @@ import java.util.List;
 public interface AndroidmasterService {
 
     List<Androidmaster> getAndroidmaster();
+
+    Androidmaster getAndroidmasterById(Long id);
+
 }

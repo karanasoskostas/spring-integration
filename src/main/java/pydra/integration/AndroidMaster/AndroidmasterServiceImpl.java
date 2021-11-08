@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pydra.integration.exception.GeneralException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AndroidmasterServiceImpl implements AndroidmasterService {
@@ -25,5 +26,11 @@ public class AndroidmasterServiceImpl implements AndroidmasterService {
         }
 
         return aMaster;
+    }
+
+    @Override
+    public Androidmaster getAndroidmasterById(Long id) {
+        Optional<Androidmaster> master = eRepository.findById(id);
+        return master.get();
     }
 }
