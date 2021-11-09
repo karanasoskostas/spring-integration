@@ -40,6 +40,7 @@ public class AndroidMasterPost  {
     @Transient
     private String period;
 
+
     @OneToMany(mappedBy = "masterpost", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private Set<AndroidDetailPost> meters;
 
