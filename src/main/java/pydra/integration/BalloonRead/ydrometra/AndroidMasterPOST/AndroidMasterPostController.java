@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import pydra.integration.AndroidMaster.Androidmaster;
+import pydra.integration.exception.GeneralException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -27,29 +25,40 @@ public class AndroidMasterPostController {
     @Autowired
     private AndroidMasterPostService eService;
 
+
+    @Autowired
+    private AndroidDetailPostService detailService;
+
     String getBaseUrl(HttpServletRequest req) {
         return req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath();
     }
 
 
-    @GetMapping("/androidmaster/getforposttosmartville/{id}")
-    public ResponseEntity<AndroidMasterPost>  getSingleAndroidMasterPost(@PathVariable("id") Long id){
-        return new ResponseEntity<AndroidMasterPost>(eService.getSingleAndroidMasterPost(id), HttpStatus.OK);
-    }
-
     @GetMapping("/androidmasterpost/{id}")
     public ResponseEntity<String> postAndroidMaster(HttpServletRequest request, @PathVariable("id") Long id) throws URISyntaxException {
-//        String baseurl = getBaseUrl(request)+"/androidmaster/getforposttosmartville/"+id.toString();
-//        System.out.println("BaseUrl "+ baseurl);
 
-        AndroidMasterPost master = eService.getSingleAndroidMasterPost(id);   // get AndroidMaster
+        AndroidMasterPost  master = eService.getSingleAndroidMasterPost(id);   // get AndroidMaster
+        List<AndroidDetailPost> detaillist = detailService.getallByFileId(id);    // get AndroidDetail
 
 //        Map<String,String> map =  AndroidMasterMap(master);   //master JSON
 //        String requestJson = map.toString();
         ObjectNode objectnode = AndroidMasterObjectNode(master);
         String requestJson = objectnode.toString();
 
-        requestJson = "["  + requestJson +  "]";
+        String detailstring = "[";
+        ObjectNode detailobjectnode = null;
+        for(int i = 0; i < detaillist.size(); i++){
+            detailobjectnode = AndroidDetailObjectNode(detaillist.get(i));
+            detailstring = detailstring + detailobjectnode.toString();
+            if (i < detaillist.size() - 1 )  {
+                detailstring = detailstring + ",";
+            }
+        }
+        detailstring = detailstring + "]";
+        requestJson = requestJson.substring(0,requestJson.length()-1) + ",\"meters\":" + detailstring ;
+
+
+        requestJson = "["  + requestJson +  "}]";
 
         String postUrl = "http://demo.smartville.gr/api/rest/routelist";
         HttpHeaders headers = getPostHeaders();
@@ -59,15 +68,7 @@ public class AndroidMasterPostController {
         String answer = restTemplate.postForObject(postUrl, entity, String.class);
         System.out.println(answer);
 
-//        restTemplate.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
-//
-//
-//        HttpEntity<AndroidMasterPost> requestEntity = new HttpEntity<AndroidMasterPost>(master, postheaders);
-//        //URI uri = restTemplate.postForLocation(postUrl,  requestEntity);
-//        ResponseEntity<AndroidMasterPost> responseEntity = restTemplate.postForEntity(postUrl, requestEntity, AndroidMasterPost.class);
-//        //master = restTemplate.postForObject( postUrl, master, Androidmaster.class, );
-
-        return new ResponseEntity<String>(answer,HttpStatus.OK);
+        return new ResponseEntity<String>(HttpStatus.OK.toString(),HttpStatus.OK);
     }
 
 
@@ -103,6 +104,16 @@ public class AndroidMasterPostController {
         objectNode.put("period", master.getPeriod());
         return objectNode;
     }
+
+    public ObjectNode AndroidDetailObjectNode(AndroidDetailPost detail) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode objectNode = mapper.createObjectNode();
+        objectNode.put("id", detail.getId());
+        objectNode.put("serial_number", detail.getSerial_number());
+
+        return objectNode;
+    }
+
 
 
 
