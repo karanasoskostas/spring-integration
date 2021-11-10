@@ -13,11 +13,17 @@ public class Sndgenpar {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "deya_aa")
+    private Long deyaaa;
 
     @Column(name = "diadromh_format")
     private String diadromhformat;
 
     public String getDiadromhformat() {
         return diadromhformat;
+    }
+
+    public Long getDeyaaa() {
+        return deyaaa;
     }
 }

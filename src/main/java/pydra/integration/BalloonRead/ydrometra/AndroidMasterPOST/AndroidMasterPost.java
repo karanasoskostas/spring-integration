@@ -23,10 +23,10 @@ public class AndroidMasterPost  {
     @Column(name="descr")
     private String description;
 
-    @Column(name="create_date")
+    @Column(name="fromdate")
     private Date start_date;
 
-    @Column(name="create_date", updatable = false,insertable = false)
+    @Column(name="todate")
     private Date end_date;
 
     @JsonIgnore

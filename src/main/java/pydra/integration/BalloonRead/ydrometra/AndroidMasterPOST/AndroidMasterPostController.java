@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import pydra.integration.AndroidMaster.Androidmaster;
+import pydra.integration.Snd_genpar.Sndgenpar;
+import pydra.integration.Snd_genpar.SndgenparService;
 import pydra.integration.exception.GeneralException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +26,10 @@ public class AndroidMasterPostController {
 
     @Autowired
     private AndroidMasterPostService eService;
-
-
     @Autowired
     private AndroidDetailPostService detailService;
+    @Autowired
+    private SndgenparService gService;
 
     String getBaseUrl(HttpServletRequest req) {
         return req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + req.getContextPath();
@@ -35,7 +37,7 @@ public class AndroidMasterPostController {
 
 
     @GetMapping("/androidmasterpost/{id}")
-    public ResponseEntity<String> postAndroidMaster(HttpServletRequest request, @PathVariable("id") Long id) throws URISyntaxException {
+    public ResponseEntity<String> postAndroidMaster(HttpServletRequest request, @PathVariable("id") Long id)  {
 
         AndroidMasterPost  master = eService.getSingleAndroidMasterPost(id);   // get AndroidMaster
         List<AndroidDetailPost> detaillist = detailService.getallByFileId(id);    // get AndroidDetail
@@ -60,15 +62,16 @@ public class AndroidMasterPostController {
 
         requestJson = "["  + requestJson +  "}]";
 
-        String postUrl = "http://demo.smartville.gr/api/rest/routelist";
+//        String postUrl = "http://demo.smartville.gr/api/rest/routelist";
+        String postUrl = this.getPostUrl();
         HttpHeaders headers = getPostHeaders();
         RestTemplate restTemplate = new RestTemplate();
 
         HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
-        String answer = restTemplate.postForObject(postUrl, entity, String.class);
+        String  answer = restTemplate.postForObject(postUrl, entity, String.class);
         System.out.println(answer);
 
-        return new ResponseEntity<String>(HttpStatus.OK.toString(),HttpStatus.OK);
+        return new ResponseEntity<String>("200 from Spring",HttpStatus.OK);
     }
 
 
@@ -114,6 +117,23 @@ public class AndroidMasterPostController {
         return objectNode;
     }
 
+    private String getPostUrl() {
+        String url="";
+        Sndgenpar genpar = gService.getGenpar(1L);
+        switch (genpar.getDeyaaa().toString()){
+            case "22":
+                url = "demo";
+            default:
+                url = "demo";
+        }
+        url = "http://"+url+".smartville.gr/api/rest/routelist";
+
+        return url;
+    }
+
+
+
+    }
 
 
 
@@ -123,4 +143,5 @@ public class AndroidMasterPostController {
 
 
 
-}
+
+
