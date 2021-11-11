@@ -1,6 +1,6 @@
 package pydra.integration.BalloonRead.ydrometra;
 
-import lombok.Data;
+
 
 public class FconsumersOnceDTO {
 

@@ -3,6 +3,7 @@ package pydra.integration.Fconsumers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pydra.integration.BalloonRead.ydrometra.FconsumersOnceDTO;
+import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetailimages.Androiduploaddetailimages;
 import pydra.integration.Snd_genpar.Sndgenpar;
 import pydra.integration.Snd_genpar.SndgenparService;
 import pydra.integration.exception.GeneralException;
@@ -26,6 +27,8 @@ public class FconsumersServiceImpl implements FconsumersService{
     @Override
     public Fconsumers getSingleFconsumer(Long id) {
         Optional<Fconsumers> fconsumer = eRepository.findById(id);
+        Androiduploaddetailimages a;
+
         return fconsumer.get();
     }
 

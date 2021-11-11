@@ -20,6 +20,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 
+import static pydra.integration.GenparConfiguration.defaultProperties;
+
 
 @Controller
 public class AndroidMasterPostController {
@@ -119,8 +121,9 @@ public class AndroidMasterPostController {
 
     private String getPostUrl() {
         String url="";
-        Sndgenpar genpar = gService.getGenpar(1L);
-        switch (genpar.getDeyaaa().toString()){
+        String deyaAA = defaultProperties.getProperty("deyaAA");
+
+        switch (deyaAA){
             case "22":
                 url = "demo";
             default:

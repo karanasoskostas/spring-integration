@@ -4,6 +4,8 @@ package pydra.integration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Properties;
+
 
 @SpringBootApplication
 //@Import(GlobalExceptionHandler.class)

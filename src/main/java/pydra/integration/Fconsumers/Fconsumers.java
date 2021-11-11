@@ -18,6 +18,7 @@ import java.text.ParseException;
 @Table(name="ydr_fconsumers")
 public class Fconsumers {
 
+
     @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_YDR_GENERAL")
 //    @SequenceGenerator(sequenceName = "SEQ_YDR_GENERAL", allocationSize = 1, name = "SEQ_YDR_GENERAL")

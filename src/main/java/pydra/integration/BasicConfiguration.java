@@ -12,9 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import pydra.integration.Snd_genpar.Sndgenpar;
 import pydra.integration.Snd_genpar.SndgenparService;
 
+import java.util.Properties;
+
 @Configuration
 @EnableWebSecurity
 public class BasicConfiguration extends WebSecurityConfigurerAdapter {
+
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -37,6 +42,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
 
 
 

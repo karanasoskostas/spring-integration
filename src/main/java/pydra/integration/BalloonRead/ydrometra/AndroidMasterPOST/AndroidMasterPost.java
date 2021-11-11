@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import java.util.Date;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -60,10 +59,16 @@ public class AndroidMasterPost  {
     }
 
     public Date getStart_date() {
+        if (this.start_date == null){
+            this.start_date = new Date(System.currentTimeMillis());
+        }
         return start_date;
     }
 
     public Date getEnd_date() {
+        if (this.end_date == null) {
+            this.end_date = new Date(System.currentTimeMillis());
+        }
         return end_date;
     }
 
