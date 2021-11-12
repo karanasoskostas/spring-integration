@@ -11,7 +11,7 @@ public interface YdrometraDates {
     String getmanufacturer();
     String getmodel();
     String getold_hydrometer();
-    String getdate();
+    String getmovedate();
     String getcounter();
     String getkwdikos_katanalwti();
     String getcontact();

@@ -11,4 +11,6 @@ public interface AndroiddetailService {
     List<Androiddetail> getAndroiddetail();
 
     List<Androiddetail> getAndroiddetailbyFileid(Long file_id);
+
+    Androiddetail findByFileIdnadYdrometro(Long file_id, String ydrometro);
 }

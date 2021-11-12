@@ -1,6 +1,7 @@
 package pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetailimages;
 
 import lombok.Getter;
+import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetail.AndroidUploadDetail;
 
 import javax.persistence.*;
 
@@ -15,11 +16,23 @@ public class Androiduploaddetailimages {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "detail_id")
+    @Column(name = "detail_id", nullable = false)
     private Long detailid;
 
     @Column(name = "imageurl")
     private String imageurl;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="detail_id", referencedColumnName = "id", updatable = false, insertable = false)
+    private AndroidUploadDetail androiduploaddetail;
+
+    public AndroidUploadDetail getAndroiduploaddetail() {
+        return androiduploaddetail;
+    }
+
+    public void setAndroiduploaddetail(AndroidUploadDetail androiduploaddetail) {
+        this.androiduploaddetail = androiduploaddetail;
+    }
 
     public Long getId() {
         return id;
@@ -36,7 +49,7 @@ public class Androiduploaddetailimages {
     public void setDetailid(Long detailid) {
         this.detailid = detailid;
     }
-
+//
     public String getImageurl() {
         return imageurl;
     }

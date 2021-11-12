@@ -27,10 +27,10 @@ public interface YdrometraDatesRepository extends JpaRepository<Dual, Long> {
                     "       ydr_fydromet.rydr_date                                 as movedate,\n" +
                     "       null                                                   as counter, \n" +
                     "       FN_FORMAT_DIADROMI(rma_code, snd_genpar.DIADROMH_FORMAT)  as kwdikos_katanalwti,\n" +
-                    "       nvl(liable.rpe_lastname,' ')||' '||nvl(liable.RPE_FIRSTNAME,' ')  as contact ,\n" +
+                    "       trim(nvl(liable.rpe_lastname,' ')||' '||nvl(liable.RPE_FIRSTNAME,' '))  as contact ,\n" +
                     "       decode(rma_addr_odos_akin, \n" +
-                    "              null , rma_perigr_addr , \n" +
-                    "              trim(nvl(rad_address, ' ')) ||' '||nvl(to_char(rma_addr_no1_akin),' ') ||' '||nvl(to_char(rma_addr_no2_akin),' '))  As address,\n" +
+                    "              null , trim(rma_perigr_addr) , \n" +
+                    "              trim(trim(nvl(rad_address, ' ')) ||' '||nvl(to_char(rma_addr_no1_akin),' ') ||' '||nvl(to_char(rma_addr_no2_akin),' ')))  As address,\n" +
                     "       rma_parathr                                             as description,\n" +
                     "       YDR_FSECTORS.SECT_DESCR                                 as sector\n" +
                     "                                                                                                                  \n" +

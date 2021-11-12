@@ -1,20 +1,27 @@
 package pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetail;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Immutable;
+import pydra.integration.BalloonRead.ydrometra.AndroidMasterPOST.AndroidDetailPost;
+import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetailimages.Androiduploaddetailimages;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="androiduploaddetail")
 public class AndroidUploadDetail {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_YDR_GENERAL")
-//    @SequenceGenerator(sequenceName = "SEQ_YDR_GENERAL", allocationSize = 1, name = "SEQ_YDR_GENERAL")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_YDR_GENERAL")
+    @SequenceGenerator(sequenceName = "SEQ_YDR_GENERAL", allocationSize = 1, name = "SEQ_YDR_GENERAL")
     @Column(name = "id")
     private Long id;
 
     @Column(name = "file_id")
-    private Long fileid;
+    private Long routelist;
 
     @Column(name = "aa")
     private Long aa;
@@ -74,13 +81,14 @@ public class AndroidUploadDetail {
     private String dblng;
 
     @Column(name = "entrylat")
-    private String entrylat;
+    private String operator_latitude;
 
     @Column(name = "entrylng")
-    private String entrylng;
+    private String operator_longitude;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "modified_date")
-    private Date modifieddate;
+    private Date date;
 
     @Column(name = "blabh1")
     private Long blabh1;
@@ -95,7 +103,27 @@ public class AndroidUploadDetail {
     private String neoydrometro;
 
     @Column(name = "kat_com")
-    private String katcom;
+    private String notice;
+
+    @Transient
+    private String[] damage_type_code;
+
+    @Transient
+    private String user;
+
+    @Transient
+    private String value;
+
+    @OneToMany(mappedBy = "androiduploaddetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    private List<Androiduploaddetailimages> images;
+
+    public List<Androiduploaddetailimages> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Androiduploaddetailimages> images) {
+        this.images = images;
+    }
 
     public Long getId() {
         return id;
@@ -105,12 +133,12 @@ public class AndroidUploadDetail {
         this.id = id;
     }
 
-    public Long getFileid() {
-        return fileid;
+    public Long getRoutelist() {
+        return routelist;
     }
 
-    public void setFileid(Long fileid) {
-        this.fileid = fileid;
+    public void setRoutelist(Long routelist) {
+        this.routelist = routelist;
     }
 
     public Long getAa() {
@@ -193,14 +221,6 @@ public class AndroidUploadDetail {
         this.prohg = prohg;
     }
 
-    public Long getNea() {
-        return nea;
-    }
-
-    public void setNea(Long nea) {
-        this.nea = nea;
-    }
-
     public String getMetrhseis() {
         return metrhseis;
     }
@@ -265,28 +285,28 @@ public class AndroidUploadDetail {
         this.dblng = dblng;
     }
 
-    public String getEntrylat() {
-        return entrylat;
+    public String getOperator_latitude() {
+        return operator_latitude;
     }
 
-    public void setEntrylat(String entrylat) {
-        this.entrylat = entrylat;
+    public void setOperator_latitude(String operator_latitude) {
+        this.operator_latitude = operator_latitude;
     }
 
-    public String getEntrylng() {
-        return entrylng;
+    public String getOperator_longitude() {
+        return operator_longitude;
     }
 
-    public void setEntrylng(String entrylng) {
-        this.entrylng = entrylng;
+    public void setOperator_longitude(String operator_longitude) {
+        this.operator_longitude = operator_longitude;
     }
 
-    public Date getModifieddate() {
-        return modifieddate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setModifieddate(Date modifieddate) {
-        this.modifieddate = modifieddate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Long getBlabh1() {
@@ -321,11 +341,39 @@ public class AndroidUploadDetail {
         this.neoydrometro = neoydrometro;
     }
 
-    public String getKatcom() {
-        return katcom;
+    public String getNotice() {
+        return notice;
     }
 
-    public void setKatcom(String katcom) {
-        this.katcom = katcom;
+    public void setNotice(String notice) {
+        this.notice = notice;
+    }
+
+    public String[] getDamage_type_code() {
+        return damage_type_code;
+    }
+
+    public void setDamage_type_code(String[] damage_type_code) {
+        this.damage_type_code = damage_type_code;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public Long getNea() {
+        return nea;
+    }
+
+    public void setNea(Long nea) {
+        this.nea = nea;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

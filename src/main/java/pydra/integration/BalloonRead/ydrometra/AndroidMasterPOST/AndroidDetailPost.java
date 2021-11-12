@@ -30,4 +30,8 @@ public class AndroidDetailPost {
     public String getSerial_number() {
         return serial_number;
     }
+
+
+
+
 }

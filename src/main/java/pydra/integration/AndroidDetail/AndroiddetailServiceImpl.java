@@ -31,5 +31,10 @@ public class AndroiddetailServiceImpl implements AndroiddetailService{
         return aDetail;
     }
 
+    @Override
+    public Androiddetail findByFileIdnadYdrometro(Long file_id, String ydrometro) {
+        return eRepository.findByFileidAndYdrometro(file_id, ydrometro);
+    }
+
 
 }

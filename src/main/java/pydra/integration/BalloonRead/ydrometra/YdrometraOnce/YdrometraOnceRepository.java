@@ -19,13 +19,15 @@ public interface YdrometraOnceRepository extends JpaRepository<Dual, Long> {
                     "       null                                                   as manufacturer,\n" +
                     "       null                                                   as model,\n" +
                     "       null                                                   as old_hydrometer,\n" +
-                    "       null                                                   as movedate,\n" +
+                    "       nvl((select max(RYDR_DATE)                                               \n" +
+    "                            from ydr_fydromet                                                   \n" +
+    "                            where RYDR_MAA = ydr_fconsumers.id),ydr_fconsumers.rma_create_date)  as movedate,\n" +
                     "       null                                                   as counter, \n" +
                     "       FN_FORMAT_DIADROMI(rma_code, snd_genpar.DIADROMH_FORMAT)  as kwdikos_katanalwti,\n" +
-                    "       nvl(liable.rpe_lastname,' ')||' '||nvl(liable.RPE_FIRSTNAME,' ')  as contact ,\n" +
-                    "       decode(rma_addr_odos_akin, \n" +
+                    "       trim(nvl(liable.rpe_lastname,' ')||' '||nvl(liable.RPE_FIRSTNAME,' ')) as contact ,\n" +
+                    "       trim(decode(rma_addr_odos_akin, \n" +
                     "              null , rma_perigr_addr , \n" +
-                    "              trim(nvl(rad_address, ' ')) ||' '||nvl(to_char(rma_addr_no1_akin),' ') ||' '||nvl(to_char(rma_addr_no2_akin),' '))  As address,\n" +
+                    "              trim(nvl(rad_address, ' ')) ||' '||nvl(to_char(rma_addr_no1_akin),' ') ||' '||nvl(to_char(rma_addr_no2_akin),' ')))  As address,\n" +
                     "       rma_parathr                                             as description,\n" +
                     "       YDR_FSECTORS.SECT_DESCR                                 as sector\n" +
                     "                                                                                                                  \n" +
