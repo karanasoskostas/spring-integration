@@ -35,7 +35,13 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .csrf()
+                .disable();
+        // .and()   μπηκε επειδη δεν στα POST γυρναγε 401
+        // .csrf()
+        // .disable();
     }
 
     @Bean

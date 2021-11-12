@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="AndroidUploadDetail")
+@Table(name="androiduploaddetail")
 public class AndroidUploadDetail {
 
     @Id
@@ -41,7 +41,7 @@ public class AndroidUploadDetail {
     private String address;
 
     @Column(name = "ydrometro")
-    private String ydrometro;
+    private String serial_number;
 
     @Column(name = "prohg")
     private Long prohg;
@@ -177,12 +177,12 @@ public class AndroidUploadDetail {
         this.address = address;
     }
 
-    public String getYdrometro() {
-        return ydrometro;
+    public String getSerial_number() {
+        return serial_number;
     }
 
-    public void setYdrometro(String ydrometro) {
-        this.ydrometro = ydrometro;
+    public void setSerial_number(String serial_number) {
+        this.serial_number = serial_number;
     }
 
     public Long getProhg() {

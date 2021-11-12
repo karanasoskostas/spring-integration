@@ -10,7 +10,7 @@ public class AndroiduploaddetailServiceImpl implements AndroiduploaddetailServic
     private  AndroidUploadDetailRepository eRepository;
 
     @Override
-    public AndroidUploadDetail saceAndroidUploadDetail(AndroidUploadDetail detail) {
+    public AndroidUploadDetail saveAndroidUploadDetail(AndroidUploadDetail detail) {
         return eRepository.save(detail);
     }
 }
