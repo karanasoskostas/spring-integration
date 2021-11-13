@@ -52,6 +52,7 @@ public class AndroidUploadDetailController {
         List<Androiduploaddetailimages> images;
         String damages[];
         Long nea;
+        Double d;
 
         ydrometra_all =  uploaddetaillist.size();
 
@@ -80,11 +81,27 @@ public class AndroidUploadDetailController {
             uploaddetail.setCom(androiddetail.getCom());
             uploaddetail.setOwner(androiddetail.getOwner());
             uploaddetail.setEktypcode(androiddetail.getEktyp_code());
-            nea = BigDecimal(uploaddetail.getValue()) ;
+            d = Double.parseDouble(uploaddetail.getValue());
+            nea = d.longValue();
             uploaddetail.setNea(nea);
 
-
-
+            damages = uploaddetail.getDamage_type_code();   // Βλαβες ["1", "2"],
+            if (damages != null) {
+                for (int k = 0; k < damages.length; k++) {
+                    if (k > 2) {
+                        break;
+                    }
+                    if (k == 0) {
+                        uploaddetail.setBlabh1(Long.valueOf(damages[k]).longValue());
+                    }
+                    if (k == 1) {
+                        uploaddetail.setBlabh2(Long.valueOf(damages[k]).longValue());
+                    }
+                    if (k == 2) {
+                        uploaddetail.setBlabh3(Long.valueOf(damages[k]).longValue());
+                    }
+                }
+            }
 
             detail_id = dualRepository.getYdrGeneralSeqnextval();  // Παιρνω ID για να δωσω στo Detail Images γιατι αν παρει ID στη βαση επιστρεφει null
             uploaddetail.setId(detail_id);
