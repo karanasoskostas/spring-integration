@@ -11,7 +11,9 @@ import pydra.integration.AndroidDetail.Androiddetail;
 import pydra.integration.AndroidDetail.AndroiddetailRepository;
 import pydra.integration.AndroidDetail.AndroiddetailService;
 import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetailimages.Androiduploaddetailimages;
+import pydra.integration.Dual.DualRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -23,6 +25,8 @@ public class AndroidUploadDetailController {
     private AndroiduploaddetailService eService;
     @Autowired
     private AndroiddetailService androiddetailService;
+    @Autowired
+    private DualRepository dualRepository;
 
 
     @PostMapping("/androiduploaddetail")
@@ -44,7 +48,10 @@ public class AndroidUploadDetailController {
         Long ydrometra_bad = 0L;
         Integer ydrometra_all = 0;
         String ydrometro , return_body="";
+        Long detail_id;
         List<Androiduploaddetailimages> images;
+        String damages[];
+        Long nea;
 
         ydrometra_all =  uploaddetaillist.size();
 
@@ -60,20 +67,39 @@ public class AndroidUploadDetailController {
             }
             ydrometra_good = ydrometra_good + 1;
 
-            //detail.setId((long) i);
-//            detail.setFileid((long) i);
+            uploaddetail.setAa(androiddetail.getAa());
+            uploaddetail.setDeyaaa(androiddetail.getDeya_aa());
+            uploaddetail.setMaa(androiddetail.getMaa());
+            uploaddetail.setTomeas(androiddetail.getTomeas());
+            uploaddetail.setCode(androiddetail.getCode());
+            uploaddetail.setStatus(androiddetail.getStatus());
+            uploaddetail.setName(androiddetail.getName());
+            uploaddetail.setAddress(androiddetail.getAddress());
+            uploaddetail.setProhg(androiddetail.getProhg());
+            uploaddetail.setMetrhseis(androiddetail.getMetrhseis());
+            uploaddetail.setCom(androiddetail.getCom());
+            uploaddetail.setOwner(androiddetail.getOwner());
+            uploaddetail.setEktypcode(androiddetail.getEktyp_code());
+            nea = BigDecimal(uploaddetail.getValue()) ;
+            uploaddetail.setNea(nea);
+
+
+
+
+            detail_id = dualRepository.getYdrGeneralSeqnextval();  // Παιρνω ID για να δωσω στo Detail Images γιατι αν παρει ID στη βαση επιστρεφει null
+            uploaddetail.setId(detail_id);
+
             images = uploaddetail.getImages();
-            for(int j=0; j<images.size(); j++){
-                images.get(j).setDetailid(uploaddetail.getId());
+            if (images == null || images.isEmpty()) {  }
+            else {
+                for (int j = 0; j < images.size(); j++) {
+                    images.get(j).setDetailid(detail_id);
+                }
             }
             eService.saveAndroidUploadDetail(uploaddetail);
 
 
         }
-//        System.out.println(detail.getSerial_number());
-//        detail.setId(1L);
-//        detail.setFileid(1L);
-//        eService.saveAndroidUploadDetail(detail);
             return_body = "ALL       "+ydrometra_all.toString()+"\n"+
                           "FOUND     "+ydrometra_good.toString()+"\n"+
                           "NOT FOUND "+ydrometra_bad.toString();

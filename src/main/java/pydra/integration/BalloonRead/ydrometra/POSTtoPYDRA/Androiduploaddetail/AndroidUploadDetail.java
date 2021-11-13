@@ -15,8 +15,8 @@ import java.util.Set;
 public class AndroidUploadDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_YDR_GENERAL")
-    @SequenceGenerator(sequenceName = "SEQ_YDR_GENERAL", allocationSize = 1, name = "SEQ_YDR_GENERAL")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="SEQ_YDR_GENERAL")
+//    @SequenceGenerator(sequenceName = "SEQ_YDR_GENERAL", allocationSize = 1, name = "SEQ_YDR_GENERAL")
     @Column(name = "id")
     private Long id;
 
@@ -375,5 +375,9 @@ public class AndroidUploadDetail {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }
