@@ -16,6 +16,8 @@ import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetailim
 import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploadmaster.Androiduploadmaster;
 import pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploadmaster.AndroiduploadmasterService;
 import pydra.integration.Dual.DualRepository;
+import pydra.integration.Fkatamet.Fkatamet;
+import pydra.integration.Fkatamet.FkatametService;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,6 +38,8 @@ public class AndroidUploadDetailController {
     private AndroidmasterService androidmasterService;
     @Autowired
     private AndroiduploadmasterService uploadmasterService;
+    @Autowired
+    private FkatametService fkatametService;
 
     @PostMapping("/androiduploaddetail")
     public ResponseEntity<String> saveAndroidUploadDetail(@RequestBody AndroidUploadDetail detail){
@@ -53,16 +57,12 @@ public class AndroidUploadDetailController {
         Androiddetail androiddetail;
         Androidmaster master ;
         Androiduploadmaster  savedmaster;
-        Long file_id = 0L;
-        Long ydrometra_good = 0L;
-        Long ydrometra_bad = 0L;
+        Long file_id = 0L , ydrometra_good = 0L, ydrometra_bad = 0L ,  nea , detail_id;
         Integer ydrometra_all = 0;
-        String ydrometro , return_body="";
-        Long detail_id;
+        String ydrometro , return_body="" , user ="" , damages[];
         List<Androiduploaddetailimages> images;
-        String damages[];
-        Long nea;
         Double d;
+        Fkatamet fkatamet;
 
         ydrometra_all =  uploaddetaillist.size();
 
@@ -76,7 +76,7 @@ public class AndroidUploadDetailController {
                 ydrometra_bad = ydrometra_bad + 1;
                 continue;
             }
-
+            // τα παδια του uploaddetail που δεν υπάρχουν εδω έρχονται απο το JSON (lat,long, dates ...)
             uploaddetail.setAa(androiddetail.getAa());
             uploaddetail.setDeyaaa(androiddetail.getDeya_aa());
             uploaddetail.setMaa(androiddetail.getMaa());
@@ -93,6 +93,11 @@ public class AndroidUploadDetailController {
             d = Double.parseDouble(uploaddetail.getValue());
             nea = d.longValue();
             uploaddetail.setNea(nea);
+            user = uploaddetail.getUser();  //παίρνω το χρήστη απο το τελευταίο row , είναι ίδιος σε ολα , για το Master , είναι το emailaccount του καταμετρητή
+            fkatamet = fkatametService.findByEmailaccount(user);
+            if ( fkatamet != null ) {
+                uploaddetail.setKatametrhths(fkatamet.getCode());
+            }
 
             damages = uploaddetail.getDamage_type_code();   // Βλαβες ["1", "2"],
             if (damages != null) {
@@ -127,6 +132,8 @@ public class AndroidUploadDetailController {
                 ydrometra_good = ydrometra_good + 1;
             }
 
+
+
         }
 
         if ( ydrometra_good > 0 ) {
@@ -147,6 +154,7 @@ public class AndroidUploadDetailController {
                 uploadmaster.setCom(master.getCom());
                 uploadmaster.setDeya_aa(master.getDeya_aa());
                 uploadmaster.setUpload_date(new Date(System.currentTimeMillis()));
+                uploadmaster.setUsr(user);
 
                 savedmaster = uploadmasterService.saveAndroidUploadMaster(uploadmaster);
 

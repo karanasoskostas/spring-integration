@@ -105,6 +105,10 @@ public class AndroidUploadDetail {
     @Column(name = "kat_com")
     private String notice;
 
+    @Column(name = "katametrhths_code")
+    private Long katametrhths;
+
+
     @Transient
     private String[] damage_type_code;
 
@@ -379,5 +383,13 @@ public class AndroidUploadDetail {
 
     public String getValue() {
         return value;
+    }
+
+    public Long getKatametrhths() {
+        return katametrhths;
+    }
+
+    public void setKatametrhths(Long katametrhths) {
+        this.katametrhths = katametrhths;
     }
 }
