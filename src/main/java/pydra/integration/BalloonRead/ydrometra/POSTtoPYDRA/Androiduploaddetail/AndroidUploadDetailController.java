@@ -59,16 +59,38 @@ public class AndroidUploadDetailController {
         Androiduploadmaster  savedmaster;
         Long file_id = 0L , ydrometra_good = 0L, ydrometra_bad = 0L ,  nea , detail_id;
         Integer ydrometra_all = 0;
-        String ydrometro , return_body="" , user ="" , damages[];
+        String ydrometro , return_body="" , user ="" , damages[], jsonimages[];
         List<Androiduploaddetailimages> images;
         Double d;
         Fkatamet fkatamet;
+        HttpStatus httpstatus = HttpStatus.OK;
 
         ydrometra_all =  uploaddetaillist.size();
+
+        if (uploaddetaillist.isEmpty()) {   // κενο detail τιποτα
+            ydrometra_good = 0L;
+            ydrometra_bad = 0L;
+            ydrometra_all = 0;
+            httpstatus = HttpStatus.NOT_FOUND;
+        }
 
         for (int i=0; i< uploaddetaillist.size(); i++){
             uploaddetail = uploaddetaillist.get(i);
             file_id = uploaddetail.getRoutelist();
+
+            if (i == 0) {
+
+                Androiduploadmaster m = uploadmasterService.getById(file_id);  // αν υπαρχει ήδη το αρχειο δεν κανει τιποτα
+                if (m !=null){
+                    ydrometra_good = 0L;
+                    ydrometra_bad = 0L;
+                    ydrometra_all = 0;
+                    httpstatus = HttpStatus.CONFLICT;
+                    break;
+                }
+
+            }
+
             ydrometro = uploaddetail.getSerial_number();
 
             androiddetail = androiddetailService.findByFileIdnadYdrometro(file_id,ydrometro);
@@ -169,6 +191,6 @@ public class AndroidUploadDetailController {
                       "NOT FOUND "+ydrometra_bad.toString();
 
 
-        return new ResponseEntity<String>(return_body,HttpStatus.CREATED);
+        return new ResponseEntity<String>(return_body,httpstatus);
     }
 }

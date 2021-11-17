@@ -39,7 +39,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();
-        // .and()   μπηκε επειδη δεν στα POST γυρναγε 401
+        // .and()   μπηκε επειδη στα POST γυρναγε 401
         // .csrf()
         // .disable();
     }

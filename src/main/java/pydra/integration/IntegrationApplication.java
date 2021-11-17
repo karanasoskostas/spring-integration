@@ -15,14 +15,8 @@ public class IntegrationApplication {
 
 	public static void main(String[] args) {
 
-//		SpringApplication application = new SpringApplication(IntegrationApplication.class);
-//
-//		Properties properties = new Properties();
-//		properties.put("security.basic.enabled", "true");
-//		properties.put("management.security.enabled","true");
-//		properties.put("spring.autoconfigure.exclude[0]","");
-//		application.setDefaultProperties(properties);
-
+//		long heapsize = Runtime.getRuntime().totalMemory();
+//		System.out.println("heapsize is :: " + heapsize);
 
 		SpringApplication.run(IntegrationApplication.class, args);
 	}

@@ -118,6 +118,7 @@ public class AndroidUploadDetail {
     @Transient
     private String value;
 
+
     @OneToMany(mappedBy = "androiduploaddetail", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     private List<Androiduploaddetailimages> images;
 

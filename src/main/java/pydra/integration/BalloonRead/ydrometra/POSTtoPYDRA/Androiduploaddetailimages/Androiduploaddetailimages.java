@@ -16,6 +16,7 @@ public class Androiduploaddetailimages {
     @Column(name = "id")
     private Long id;
 
+    
     @Column(name = "detail_id", nullable = false)
     private Long detailid;
 

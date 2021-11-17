@@ -12,4 +12,11 @@ public class AndroiduploadmasterServiceImpl implements AndroiduploadmasterServic
     public Androiduploadmaster saveAndroidUploadMaster(Androiduploadmaster master) {
         return eRepository.save(master);
     }
+
+    @Override
+    public Androiduploadmaster getById(Long id) {
+        return eRepository.getById(id);
+    }
+
+
 }
