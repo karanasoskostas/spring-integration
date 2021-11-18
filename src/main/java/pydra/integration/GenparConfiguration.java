@@ -21,6 +21,7 @@ public class GenparConfiguration {
         Sndgenpar genpar = eService.getGenpar(1L);
         defaultProperties.put("deyaAA",genpar.getDeyaaa().toString());
         defaultProperties.put("diadromhformat",genpar.getDiadromhformat());
+        defaultProperties.put("smartvillename",genpar.getSmartvillename());
         //System.out.println(defaultProperties);
     }
 

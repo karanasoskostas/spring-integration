@@ -1,7 +1,8 @@
-FROM openjdk:17-jdk
+#FROM openjdk:17-jdk
+FROM openjdk:11
 
 EXPOSE 8080
 
-ADD target/artifacts/integration_jar/integration.jar integration.jar
+ADD target/integration.jar integration.jar
 
-ENTRYPOINT ["java","-jar","integration.jar"]
+ENTRYPOINT ["java","-Duser.timezone=GMT", "-jar","integration.jar"]

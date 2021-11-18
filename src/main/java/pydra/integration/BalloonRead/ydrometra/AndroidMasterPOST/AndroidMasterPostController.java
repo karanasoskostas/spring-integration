@@ -77,8 +77,8 @@ public class AndroidMasterPostController {
     }
 
 
-    private HttpHeaders getPostHeaders() {
-        String postplainCreds = "pydra@smartville.gr:pydratest1";
+    private HttpHeaders getPostHeaders() {                   // φτιαχνει headers για post στο Smartville
+        String postplainCreds = this.getCredentials();
         byte[] postplainCredsBytes = postplainCreds.getBytes();
         byte[] postbase64CredsBytes = Base64.encodeBase64(postplainCredsBytes);
         String postbase64Creds = new String(postbase64CredsBytes);
@@ -98,7 +98,7 @@ public class AndroidMasterPostController {
         return map;
     }
 
-    public ObjectNode AndroidMasterObjectNode(AndroidMasterPost master) {
+    public ObjectNode AndroidMasterObjectNode(AndroidMasterPost master) {    // to master node
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode objectNode = mapper.createObjectNode();
         objectNode.put("code", master.getCode());
@@ -110,7 +110,7 @@ public class AndroidMasterPostController {
         return objectNode;
     }
 
-    public ObjectNode AndroidDetailObjectNode(AndroidDetailPost detail) {
+    public ObjectNode AndroidDetailObjectNode(AndroidDetailPost detail) {  // detail node
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode objectNode = mapper.createObjectNode();
         objectNode.put("id", detail.getId());
@@ -122,18 +122,25 @@ public class AndroidMasterPostController {
     private String getPostUrl() {
         String url="";
         String deyaAA = defaultProperties.getProperty("deyaAA");
+        String smartvillename = defaultProperties.getProperty("smartvillename");
 
-        switch (deyaAA){
-            case "22":
-                url = "demo";
-            default:
-                url = "demo";
-        }
-        url = "http://"+url+".smartville.gr/api/rest/routelist";
+
+        url = "http://"+smartvillename+".smartville.gr/api/rest/routelist";
 
         return url;
     }
 
+    private String getCredentials(){
+        String deyaAA = defaultProperties.getProperty("deyaAA");
+        switch (deyaAA){
+            case 5:
+                return "erp@deyakos.gr:epEYexW9XMZsJM0gOheY";
+            case 22:
+                return "erp@deya-parou.gr:cyTwFMAbrF6nhchp";
+            default:
+                return "pydra@smartville.gr:pydratest1";
+        }
+    }
 
 
     }

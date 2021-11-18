@@ -19,6 +19,10 @@ public class Sndgenpar {
     @Column(name = "diadromh_format")
     private String diadromhformat;
 
+    @Column(name = "smartvillename")
+    private String smartvillename;
+
+
     public String getDiadromhformat() {
         return diadromhformat;
     }
@@ -26,4 +30,10 @@ public class Sndgenpar {
     public Long getDeyaaa() {
         return deyaaa;
     }
+
+    public String getSmartvillename() {
+        return smartvillename;
+    }
+
+
 }
