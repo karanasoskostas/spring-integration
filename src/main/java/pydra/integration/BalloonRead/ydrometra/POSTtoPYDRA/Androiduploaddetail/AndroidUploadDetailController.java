@@ -179,12 +179,8 @@ public class AndroidUploadDetailController {
                 uploadmaster.setUsr(user);
 
                 savedmaster = uploadmasterService.saveAndroidUploadMaster(uploadmaster);
-
             }
-
         }
-
-
 
         return_body = "ALL       "+ydrometra_all.toString()+"\n"+
                       "SAVED     "+ydrometra_good.toString()+"\n"+

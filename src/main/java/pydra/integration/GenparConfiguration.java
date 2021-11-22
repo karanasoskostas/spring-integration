@@ -17,11 +17,16 @@ public class GenparConfiguration {
     private SndgenparService eService;
 
     @Bean
-    public void GenparConfiguration(){
+    public void GenparConfiguration() {
         Sndgenpar genpar = eService.getGenpar(1L);
-        defaultProperties.put("deyaAA",genpar.getDeyaaa().toString());
-        defaultProperties.put("diadromhformat",genpar.getDiadromhformat());
-        defaultProperties.put("smartvillename",genpar.getSmartvillename());
+        String smartvillename;
+        defaultProperties.put("deyaAA", genpar.getDeyaaa().toString());
+        defaultProperties.put("diadromhformat", genpar.getDiadromhformat());
+        smartvillename = genpar.getSmartvillename();
+        if (smartvillename == null) {
+            smartvillename = "demo";
+        }
+        defaultProperties.put("smartvillename", smartvillename);
         //System.out.println(defaultProperties);
     }
 

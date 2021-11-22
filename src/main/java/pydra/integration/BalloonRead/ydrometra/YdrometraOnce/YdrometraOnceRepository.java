@@ -9,8 +9,8 @@ import java.util.List;
 public interface YdrometraOnceRepository extends JpaRepository<Dual, Long> {
     public static final String qry =
             "select ydr_fconsumers.id                                      as id, " +
-                    "       ydr_fconsumers.rma_ydrom                               as code ,\n" +
-                    "       ydr_fconsumers.rma_ydrom                               as serial_number,\n" +
+                    "       trim(ydr_fconsumers.rma_ydrom)                         as code ,\n" +
+                    "       trim(ydr_fconsumers.rma_ydrom)                         as serial_number,\n" +
                     "       decode(ydr_fconsumers.emr,1,'digital','analog')        as  type,\n" +
                     "       ydr_fconsumers.latitude                                as  latitude,\n" +
                     "       ydr_fconsumers.longitude                               as  longitude,\n" +
@@ -19,9 +19,11 @@ public interface YdrometraOnceRepository extends JpaRepository<Dual, Long> {
                     "       null                                                   as manufacturer,\n" +
                     "       null                                                   as model,\n" +
                     "       null                                                   as old_hydrometer,\n" +
-                    "       nvl((select max(RYDR_DATE)                                               \n" +
-    "                            from ydr_fydromet                                                   \n" +
-    "                            where RYDR_MAA = ydr_fconsumers.id),ydr_fconsumers.rma_create_date)  as movedate,\n" +
+                    "       to_char(                                                                 \n" +
+                            "       nvl((select max(RYDR_DATE)                                               \n" +
+            "                            from ydr_fydromet                                                   \n" +
+            "                            where RYDR_MAA = ydr_fconsumers.id),ydr_fconsumers.rma_create_date) , \n" +
+                    "              'yyyy-mm-dd hh:mm:ss')                                                   as movedate,\n" +
                     "       null                                                   as counter, \n" +
                     "       FN_FORMAT_DIADROMI(rma_code, snd_genpar.DIADROMH_FORMAT)  as kwdikos_katanalwti,\n" +
                     "       trim(nvl(liable.rpe_lastname,' ')||' '||nvl(liable.RPE_FIRSTNAME,' ')) as contact ,\n" +

@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface MeasurmentsRepository extends JpaRepository<Dual, String> {
     public static final String qry =
-                    "select ydr_fconsumers.rma_ydrom                        as code,\n" +
-                    "       to_char(ydr_ftran_h.rtr_date_metr,'yyyy-mm-yy') as metrdate,\n" +
+                    "select trim(ydr_fconsumers.rma_ydrom)                  as code,\n" +
+                    "       to_char(ydr_ftran_h.rtr_date_metr,'yyyy-mm-yy hh:mm:ss') as metrdate,\n" +
                     "       ydr_ftran_h.rtr_nea                             as value,\n" +
                     "       ydr_fconsumers.latitude                         as latitude,\n" +
                     "       ydr_fconsumers.longitude                        as longitude,\n" +

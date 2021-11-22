@@ -39,9 +39,9 @@ public class AndroidMasterPostController {
 
 
     @GetMapping("/androidmasterpost/{id}")
-    public ResponseEntity<String> postAndroidMaster(HttpServletRequest request, @PathVariable("id") Long id)  {
+    public ResponseEntity<String> postAndroidMaster(HttpServletRequest request, @PathVariable("id") Long id) {
 
-        AndroidMasterPost  master = eService.getSingleAndroidMasterPost(id);   // get AndroidMaster
+        AndroidMasterPost master = eService.getSingleAndroidMasterPost(id);   // get AndroidMaster
         List<AndroidDetailPost> detaillist = detailService.getallByFileId(id);    // get AndroidDetail
 
 //        Map<String,String> map =  AndroidMasterMap(master);   //master JSON
@@ -51,29 +51,29 @@ public class AndroidMasterPostController {
 
         String detailstring = "[";
         ObjectNode detailobjectnode = null;
-        for(int i = 0; i < detaillist.size(); i++){
+        for (int i = 0; i < detaillist.size(); i++) {
             detailobjectnode = AndroidDetailObjectNode(detaillist.get(i));
             detailstring = detailstring + detailobjectnode.toString();
-            if (i < detaillist.size() - 1 )  {
+            if (i < detaillist.size() - 1) {
                 detailstring = detailstring + ",";
             }
         }
         detailstring = detailstring + "]";
-        requestJson = requestJson.substring(0,requestJson.length()-1) + ",\"meters\":" + detailstring ;
+        requestJson = requestJson.substring(0, requestJson.length() - 1) + ",\"meters\":" + detailstring;
 
 
-        requestJson = "["  + requestJson +  "}]";
+        requestJson = "[" + requestJson + "}]";
 
 //        String postUrl = "http://demo.smartville.gr/api/rest/routelist";
         String postUrl = this.getPostUrl();
         HttpHeaders headers = getPostHeaders();
         RestTemplate restTemplate = new RestTemplate();
 
-        HttpEntity<String> entity = new HttpEntity<String>(requestJson,headers);
-        String  answer = restTemplate.postForObject(postUrl, entity, String.class);
+        HttpEntity<String> entity = new HttpEntity<String>(requestJson, headers);
+        String answer = restTemplate.postForObject(postUrl, entity, String.class);
         System.out.println(answer);
 
-        return new ResponseEntity<String>("200 from Spring",HttpStatus.OK);
+        return new ResponseEntity<String>("200 from Spring", HttpStatus.OK);
     }
 
 
@@ -120,19 +120,18 @@ public class AndroidMasterPostController {
     }
 
     private String getPostUrl() {
-        String url="";
+        String url = "";
         String deyaAA = defaultProperties.getProperty("deyaAA");
         String smartvillename = defaultProperties.getProperty("smartvillename");
 
-
-        url = "http://"+smartvillename+".smartville.gr/api/rest/routelist";
+        url = "http://" + smartvillename + ".smartville.gr/api/rest/routelist";
 
         return url;
     }
 
-    private String getCredentials(){
+    private String getCredentials() {
         String deyaAA = defaultProperties.getProperty("deyaAA");
-        switch (deyaAA){
+        switch (deyaAA) {
             case "5":
                 return "erp@deyakos.gr:epEYexW9XMZsJM0gOheY";
             case "22":
@@ -143,7 +142,7 @@ public class AndroidMasterPostController {
     }
 
 
-    }
+}
 
 
 

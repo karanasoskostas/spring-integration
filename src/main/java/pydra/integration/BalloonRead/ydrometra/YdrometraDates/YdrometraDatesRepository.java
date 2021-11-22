@@ -13,9 +13,9 @@ import java.util.List;
 @Repository
 public interface YdrometraDatesRepository extends JpaRepository<Dual, Long> {
     public static final String qry =
-            " select ydr_fconsumers.id                                     as id, \n" +
-                    "       ydr_fydromet.rydr_ydrom_new                            as code ,\n" +
-                    "       ydr_fydromet.rydr_ydrom_new                            as serial_number,\n" +
+            " select        ydr_fconsumers.id                                     as id, \n" +
+                    "       trim(ydr_fydromet.rydr_ydrom_new)                      as code ,\n" +
+                    "       trim(ydr_fydromet.rydr_ydrom_new)                      as serial_number,\n" +
                     "       decode(ydr_fydromet.rydr_emr_new,1,'digital','analog') as  type,\n" +
                     "       ydr_fconsumers.latitude                                as  latitude,\n" +
                     "       ydr_fconsumers.longitude                               as  longitude,\n" +
@@ -23,8 +23,8 @@ public interface YdrometraDatesRepository extends JpaRepository<Dual, Long> {
                     "       YDR_FPERDIAM.RPDIAM_descr                              as diameter,\n" +
                     "       null                                                   as manufacturer,\n" +
                     "       null                                                   as model,\n" +
-                    "       ydr_fydromet.rydr_ydrom_old                            as old_hydrometer,\n" +
-                    "       ydr_fydromet.rydr_date                                 as movedate,\n" +
+                    "       trim(ydr_fydromet.rydr_ydrom_old)                      as old_hydrometer,\n" +
+                    "       to_char(ydr_fydromet.rydr_date,'yyyy-mm-dd hh:mm:ss')  as movedate,\n" +
                     "       null                                                   as counter, \n" +
                     "       FN_FORMAT_DIADROMI(rma_code, snd_genpar.DIADROMH_FORMAT)  as kwdikos_katanalwti,\n" +
                     "       trim(nvl(liable.rpe_lastname,' ')||' '||nvl(liable.RPE_FIRSTNAME,' '))  as contact ,\n" +
