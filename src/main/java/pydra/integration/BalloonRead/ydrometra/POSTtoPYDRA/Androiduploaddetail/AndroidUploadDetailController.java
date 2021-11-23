@@ -1,5 +1,7 @@
 package pydra.integration.BalloonRead.ydrometra.POSTtoPYDRA.Androiduploaddetail;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import pydra.integration.Fkatamet.FkatametService;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -182,9 +185,17 @@ public class AndroidUploadDetailController {
             }
         }
 
-        return_body = "ALL       "+ydrometra_all.toString()+"\n"+
-                      "SAVED     "+ydrometra_good.toString()+"\n"+
-                      "NOT FOUND "+ydrometra_bad.toString();
+//        return_body = "ALL       "+ydrometra_all.toString()+"\n"+
+//                      "SAVED     "+ydrometra_good.toString()+"\n"+
+//                      "NOT FOUND "+ydrometra_bad.toString();
+
+
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode objectNode = mapper.createObjectNode();
+        objectNode.put("ALL", ydrometra_all.toString());
+        objectNode.put("SAVED", ydrometra_good.toString());
+        objectNode.put("NOT FOUND", ydrometra_bad.toString());
+        return_body = objectNode.toString();
 
 
         return new ResponseEntity<String>(return_body,httpstatus);
