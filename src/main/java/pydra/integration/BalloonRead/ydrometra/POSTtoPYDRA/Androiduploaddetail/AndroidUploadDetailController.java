@@ -78,18 +78,18 @@ public class AndroidUploadDetailController {
             uploaddetail = uploaddetaillist.get(i);
             file_id = uploaddetail.getRoutelist();
 
-            if (i == 0) {
-
-                Androiduploadmaster m = uploadmasterService.getById(file_id);  // αν υπαρχει ήδη το αρχειο δεν κανει τιποτα
-                if (m !=null){
-                    ydrometra_good = 0L;
-                    ydrometra_bad = 0L;
-                    ydrometra_all = 0;
-                    httpstatus = HttpStatus.CONFLICT;
-                    break;
-                }
-
-            }
+//            if (i == 0) {
+//
+//                Androiduploadmaster m = uploadmasterService.getById(file_id);  // αν υπαρχει ήδη το αρχειο δεν κανει τιποτα
+//                if (m !=null){
+//                    ydrometra_good = 0L;
+//                    ydrometra_bad = 0L;
+//                    ydrometra_all = 0;
+//                    httpstatus = HttpStatus.CONFLICT;
+//                    break;
+//                }
+//
+//            }
 
             ydrometro = uploaddetail.getSerial_number();
 

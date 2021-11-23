@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface YdrometraOnceRepository extends JpaRepository<Dual, Long> {
     public static final String qry =
-            "select ydr_fconsumers.id                                      as id, " +
+            "select ydr_fconsumers.id                                      as id ,\n" +
                     "       trim(ydr_fconsumers.rma_ydrom)                         as code ,\n" +
                     "       trim(ydr_fconsumers.rma_ydrom)                         as serial_number,\n" +
                     "       decode(ydr_fconsumers.emr,1,'digital','analog')        as  type,\n" +
@@ -37,7 +37,13 @@ public interface YdrometraOnceRepository extends JpaRepository<Dual, Long> {
                     "                    LEFT OUTER JOIN YDR_FPERSONS liable ON ( ydr_fconsumers.RMA_LIABLE_ID = liable.ID)\n" +
                     "                    LEFT OUTER JOIN YDR_FADDRESS ON ( ydr_fconsumers.RMA_ADDR_ODOS_AKIN = YDR_FADDRESS.ID ) \n" +
                     "                    inner join snd_genpar on (1=1)\n" +
-                    "                    LEFT OUTER JOIN YDR_FSECTORS ON ( ydr_fconsumers.RMA_TOMEAS = YDR_FSECTORS.SECT_CODE) ";
+                    "                    LEFT OUTER JOIN YDR_FSECTORS ON ( ydr_fconsumers.RMA_TOMEAS = YDR_FSECTORS.SECT_CODE) \n" +
+                    "                    where exists ( select 1                                                              \n" +
+                    "                                    from ydr_ftran_h                                                     \n" +
+                    "                                    where rtr_maa =  ydr_fconsumers.id                                   \n" +
+                    "                                      and rtr_etos >= 2016                                               \n" +
+                    "                                      and rtr_tot_poso > 0 )                                             \n" +
+                    "                                        ";
     @Query(nativeQuery = true, value = qry)
     List<YdrometraOnce> getAllOnce();
 
