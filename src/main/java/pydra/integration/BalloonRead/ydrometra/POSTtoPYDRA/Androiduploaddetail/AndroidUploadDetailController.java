@@ -21,6 +21,7 @@ import pydra.integration.Dual.DualRepository;
 import pydra.integration.Fkatamet.Fkatamet;
 import pydra.integration.Fkatamet.FkatametService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,7 +56,7 @@ public class AndroidUploadDetailController {
     }
 
     @PostMapping("/androiduploaddetaillist")
-    public ResponseEntity<String> saveAndroidUploadDetailList(@RequestBody List<AndroidUploadDetail> uploaddetaillist){
+    public ResponseEntity<String> saveAndroidUploadDetailList(HttpServletRequest request, @RequestBody List<AndroidUploadDetail> uploaddetaillist){
         AndroidUploadDetail uploaddetail , saveddetail;
         Androiddetail androiddetail;
         Androidmaster master ;
@@ -67,6 +68,7 @@ public class AndroidUploadDetailController {
         Double d;
         Fkatamet fkatamet;
         HttpStatus httpstatus = HttpStatus.OK;
+        String jsonString = request.getParameter("json");
 
         ydrometra_all =  uploaddetaillist.size();
 
@@ -150,14 +152,14 @@ public class AndroidUploadDetailController {
             else {
                 for (int j = 0; j < images.size(); j++) {
                     images.get(j).setDetailid(detail_id);
+
                 }
             }
+
             saveddetail = eService.saveAndroidUploadDetail(uploaddetail);
             if (saveddetail != null) {
                 ydrometra_good = ydrometra_good + 1;
             }
-
-
 
         }
 
