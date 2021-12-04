@@ -131,6 +131,7 @@ public class AndroidMasterPostController {
 
     private String getCredentials() {
         String deyaAA = defaultProperties.getProperty("deyaAA");
+        
         switch (deyaAA) {
             case "5":
                 return "erp@deyakos.gr:epEYexW9XMZsJM0gOheY";
@@ -140,6 +141,7 @@ public class AndroidMasterPostController {
                 return "pydra@smartville.gr:pydratest1";
         }
     }
+
 
 
 }

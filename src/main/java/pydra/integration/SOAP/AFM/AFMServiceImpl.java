@@ -4,10 +4,12 @@ import static pydra.integration.GenparConfiguration.defaultProperties;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.parser.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -19,10 +21,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -248,8 +247,31 @@ public class AFMServiceImpl implements AFMService{
             System.out.println(je.toString());
         }
 //
+        JSONObject myjson = new JSONObject(jsonPrettyPrintString);
+        JSONObject envelope= myjson.getJSONObject("env:Envelope");
+        JSONObject body = envelope.getJSONObject("env:Body");
+        JSONObject afmresponse = body.getJSONObject("srvc:rgWsPublic2AfmMethodResponse");
+        JSONObject result =afmresponse.getJSONObject("srvc:result");
+
+        JSONObject result_rtType =result.getJSONObject("rg_ws_public2_result_rtType");
+
+        JSONObject error_rec = result_rtType.getJSONObject("error_rec");
+
+
+        JSONObject basic_rec = result_rtType.getJSONObject("basic_rec");
+
+
+
+
+        return basic_rec.toString();
+
 //
-        return jsonPrettyPrintString;
+//        return jsonPrettyPrintString;
     }
+
+
+
+
+
 
 }
