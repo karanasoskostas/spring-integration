@@ -1,6 +1,8 @@
 package pydra.integration.Faddress;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -8,6 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="ydr_faddress")
 public class Faddress {
@@ -30,23 +36,5 @@ public class Faddress {
     @Column(name = "rad_perioxh")
     private String perioxh;
 
-    public Long getId() {
-        return id;
-    }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPolh() {
-        return polh;
-    }
-
-    public String getTk() {
-        return tk;
-    }
-
-    public String getPerioxh() {
-        return perioxh;
-    }
 }

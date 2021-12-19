@@ -15,9 +15,4 @@ public interface FdiakopesRepository extends JpaRepository<Fdiakopes, Long> {
     List<Fdiakopes> getFdiakopesOpen();
 
 
-
-
-
-
-
 }

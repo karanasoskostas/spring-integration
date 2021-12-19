@@ -16,6 +16,7 @@ public class SndgenparController {
 
     @GetMapping("/sndgenpar")
     public ResponseEntity<Sndgenpar> getSndgenpar(){
+        System.out.println("getSndgenpar");
         return new ResponseEntity<Sndgenpar>(eService.getGenpar(1L), HttpStatus.OK);
     }
 
@@ -24,5 +25,8 @@ public class SndgenparController {
         return new ResponseEntity<Sndgenpar>(eService.getGenpar(id), HttpStatus.OK);
     }
 
-
+    @GetMapping("sndgenpar-test")
+    public ResponseEntity<String> getTest(){
+        return new ResponseEntity<String >("TEST",HttpStatus.OK);
+    }
 }

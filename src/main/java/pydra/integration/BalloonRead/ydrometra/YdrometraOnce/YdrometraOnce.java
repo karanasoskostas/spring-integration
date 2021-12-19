@@ -18,5 +18,6 @@ public interface YdrometraOnce {
     String getaddress();
     String getdescription();
     String getsector();
+    String getStatus();
 
 }

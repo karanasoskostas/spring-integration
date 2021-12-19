@@ -18,5 +18,6 @@ public interface YdrometraDates {
     String getaddress();
     String getdescription();
     String getsector();
+    String getStatus();
 
 }

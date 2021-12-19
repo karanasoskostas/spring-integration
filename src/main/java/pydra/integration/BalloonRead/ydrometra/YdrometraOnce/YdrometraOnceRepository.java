@@ -31,7 +31,8 @@ public interface YdrometraOnceRepository extends JpaRepository<Dual, Long> {
                     "              null , rma_perigr_addr , \n" +
                     "              trim(nvl(rad_address, ' ')) ||' '||nvl(to_char(rma_addr_no1_akin),' ') ||' '||nvl(to_char(rma_addr_no2_akin),' ')))  As address,\n" +
                     "       rma_parathr                                             as description,\n" +
-                    "       YDR_FSECTORS.SECT_DESCR                                 as sector\n" +
+                    "       YDR_FSECTORS.SECT_DESCR                                 as sector,\n" +
+                    "       decode(ydr_fconsumers.RMA_STATUS,5,'SUSPENDED',9,'TERMINATED',1,'ACTIVE') as status \n"+
                     "                                                                                                                  \n" +
                     "from ydr_fconsumers LEFT OUTER JOIN YDR_FPERDIAM  ON (  ydr_fconsumers.RMA_DIAM_AGOG = YDR_FPERDIAM.RPDIAM_CODE)\n" +
                     "                    LEFT OUTER JOIN YDR_FPERSONS liable ON ( ydr_fconsumers.RMA_LIABLE_ID = liable.ID)\n" +
